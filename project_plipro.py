@@ -28,7 +28,7 @@ def genetic_algorithm(N, K, p_d=0.3, p_m=0.3, a1=0, a2=10, b1=0, b2=20, c1=0, c2
 
 #Κυρίως πρόγραμμα
 solutions = genetic_algorithm(100,50,2)
-or s in solutions:
+for s in solutions:
     print ('{:.2f}'.format(s[0]) + '\t' '{:.2f}'.format(s[1]) + '\t' + '{:.2f}'.format(s[2]))
         
 
