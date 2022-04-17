@@ -32,9 +32,3 @@ for s in solutions:
     print ('{:.2f}'.format(s[0]) + '\t' '{:.2f}'.format(s[1]) + '\t' + '{:.2f}'.format(s[2]))
         
 
-
-
-#Κυρίως πρόγραμμα
-solutions = genetic_algorithm(100,50,2)
-for s in solutions:
-    print ('{:.2f}'.format(s[0]) + '\t' '{:.2f}'.format(s[1]) + '\t' + '{:.2f}'.format(s[2])) 
