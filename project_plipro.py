@@ -22,11 +22,11 @@ def   mutation(t, a1, a2, b1, b2, c1, c2):
     #και το αλλάζω. Σβήνω την παλιά τιμή και βάζω μια καινούρια.
     k = random.randrange(3)
     if k==0:
-        new_t[0] = (a2-a1)*random.random() + a1
+        new_t[0] = random.randrange(a1,a2+1)
     elif k==1:
-        new_t[1] = (b2-b1)*random.random() + b1
+        new_t[1] = random.randrange(b1,b2+1)
     elif k==2:
-        new_t[2] = (c2-c1)*random.random() + c1
+        new_t[2] = random.randrange(c1,c2+1)
     #Στο τέλος μετατρέπω τη λίστα σε tuple για να
     #επιστρέψω tuple
     return tuple(new_t)
@@ -74,9 +74,9 @@ def genetic_algorithm(N, K, steps, p_cb=0.3, p_m=0.3, a1=0, a2=10, b1=0, b2=20, 
     #Ακολούθως για την μεταβλητή x μετατρέπω αυτή την τιμή στο διάστημα [a1, a2] με τον
     #παρακάτω τύπο. Ομοίως και για τις υπόλοιπες μεταβλητές.
     for n in range(N):
-        x = (a2-a1)*random.random() + a1
-        y = (b2-b1)*random.random() + b1
-        z = (c2-c1)*random.random() + c1
+        x = random.randrange(a1,a2+1)
+        y = random.randrange(b1,b2+1)
+        z = random.randrange(c1,c2+1)
         atom = (x,y,z)
         population.append(atom)
 
@@ -127,12 +127,13 @@ def genetic_algorithm(N, K, steps, p_cb=0.3, p_m=0.3, a1=0, a2=10, b1=0, b2=20, 
 
 
 
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #Κυρίως πρόγραμμα
 start = time.time()
-solutions = genetic_algorithm(100, 20, 1000, 0.2, 0.2)
+solutions = genetic_algorithm(100, 20, 100, 0.1, 0.1)
 end = time.time()
 print('Time needed = ',  end - start)
 for s in solutions:
     print ('{:.4f}'.format(s[0]) + '\t' '{:.4f}'.format(s[1]) + '\t' + '{:.4f}'.format(s[2]),   '\t\t value=','{:.2f}'.format(solutions[s]) )
-
