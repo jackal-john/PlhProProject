@@ -179,8 +179,9 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
             s = list(dictionary)[0]
             print(n, ' ', s)
             
-    plt.plot(value_over_time)
-    plt.show()
+    figure = plt.figure()
+    ax = figure.add_subplot(111)
+    ax.plot(value_over_time)
     #Τέλος Επανάληψης Γεννετικού 
     #----------------------------------------------
     return dictionary
@@ -395,6 +396,5 @@ window.mainloop()
 #     n = n + 1 
 #     if n>20:
 #         break
-
 
 
