@@ -173,13 +173,14 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
                 dictionary[new_solution2] = value2
             items = items + 1
         dictionary = dict(sorted(dictionary.items(), key=lambda item: item[1], reverse=True)[:K])
-        value_over_time.append(  list(dictionary)[0]  )
+        value_over_time.append(   max(dictionary.values())  )
         if printflag == True:
             #Τυπώνω την καλύτερη λύση.
             s = list(dictionary)[0]
             print(n, ' ', s)
             
     plt.plot(value_over_time)
+    plt.show()
     #Τέλος Επανάληψης Γεννετικού 
     #----------------------------------------------
     return dictionary
@@ -394,3 +395,6 @@ window.mainloop()
 #     n = n + 1 
 #     if n>20:
 #         break
+
+
+
