@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 import time
+import matplotlib.pyplot as plt
 
 
 
@@ -96,6 +97,7 @@ def  crossbreed(t, s):
 #Παράμετροι
 #Ν: πλήθος λύσεων
 #Κ: πλήθος επιλεγμένων λύσεων για το επόμενο βήμα
+#steps: Ο αριθμός βημάτων (γεννεών) του γεννετικού αλγορίθμου.
 #input_type : Ο τύπος των δεδομένων που χειρίζεται ο αλγόριθμος
 #0:  for integers 
 #1:  for reals
@@ -103,7 +105,6 @@ def  crossbreed(t, s):
 #a = [a1, a2, a3]
 #b = [b1, b2, b3]
 #Το a και το b περιγράφουν τα άκρα των πεδίων των μεταβλητών.
-#steps: Ο αριθμός βημάτων (γεννεών) του γεννετικού αλγορίθμου.
 #printflag: Αν εδώ βάλουμε την τιμή True τότε το πρόγραμμα θα τυπώνει σε κάθε επανάληψη την καλύτερη λύση.
 #Επιστρέφει:
 def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 30], printflag=False):
@@ -128,7 +129,7 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
     #(στην f) Το λεξικό θα περιέχει πεδία της μορφής:
     #{tupple : number}
     #π.χ.
-    #{(1.2,  3.4,  5.1) :  25.12,
+    #{(1.2,  3.4,   5.1) :  25.12,
     # (2.4,  4.12,  3.5) :  24.12}
     #
     dictionary = {}
@@ -142,6 +143,7 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
     
     #---------------------------------------------
     #Επανάληψη (βρόγχος) του Γεννετικού Αλγορίθμου
+    value_over_time = [] #κενή λίστα
     for n in range(steps):
         #Φτιάχνω μια λίστα με τα keys του λεξικού
         #για να τα χρησιμοποιήσω μετά.
@@ -171,21 +173,19 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
                 dictionary[new_solution2] = value2
             items = items + 1
         dictionary = dict(sorted(dictionary.items(), key=lambda item: item[1], reverse=True)[:K])
+        value_over_time.append(  list(dictionary)[0]  )
         if printflag == True:
             #Τυπώνω την καλύτερη λύση.
             s = list(dictionary)[0]
             print(n, ' ', s)
-    
-
+            
+    plt.plot(value_over_time)
     #Τέλος Επανάληψης Γεννετικού 
     #----------------------------------------------
     return dictionary
-        
+    
 
-
-
-
-
+    
 
 #Επιστρέφει True αν το string x είναι ακέραιος
 def   is_integer(x):
@@ -394,3 +394,5 @@ window.mainloop()
 #     n = n + 1 
 #     if n>20:
 #         break
+
+
