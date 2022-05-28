@@ -157,6 +157,10 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
     #Kαι κρατάω τα Κ με τις μεγαλύτερες τιμές.
     dictionary = dict(sorted(dictionary.items(), key=lambda item: item[1], reverse=True)[:K])
 
+    if printflag == True:
+            #Τυπώνω την καλύτερη λύση.
+            s = list(dictionary)[0]
+            print('Initial ', ' ', s, ' ', standard_function(s) )
     
     #---------------------------------------------
     #Επανάληψη (βρόγχος) του Γεννετικού Αλγορίθμου
@@ -179,6 +183,7 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
             else:
                 #Εδώ κάνω crossbread
                 #Πρέπει να επιλέξω και μια ακόμη λύση.
+                #ΔΙΟΡΘΩΝΩ
                 index = random.randrange(K)
                 s2 = mylist[index]
                 new_solution1 = crossbreed(s, s2)
@@ -196,7 +201,7 @@ def genetic_algorithm(N, K, steps, input_type, p_m=0.3, a=[0, 0, 0], b=[10, 20, 
         if printflag == True:
             #Τυπώνω την καλύτερη λύση.
             s = list(dictionary)[0]
-            print(n, ' ', s)
+            print(n, ' ', s, ' ', standard_function(s) )
     
     #Τέλος Επανάληψης Γεννετικού 
     #----------------------------------------------
@@ -338,7 +343,7 @@ def  run_genetic():
     # for item in canvas.get_tk_widget().find_all():
     #    canvas.get_tk_widget().delete(item)
     #Καθαρίζω το γράφημα ώστε να μπει το καινούριο
-    ax.clear()
+    #ax.clear()
     #draw figure
     #Σχεδιάζω το καινούριο γράφημα
     ax.plot(values)
@@ -351,6 +356,14 @@ def  run_genetic():
 #tkinter function
 def close_window():
     window.destroy()
+    return
+
+
+def clear_plots():
+    ax.clear()
+    canvas.draw()
+    result_outpout.delete(0.0,tk.END)
+    solutions_outpout.delete(0.0,tk.END)
     return
 
 
@@ -417,6 +430,7 @@ dd_menu = tk.OptionMenu(window, variable, *options_list).grid(row=5, column=1, s
 #Buttons
 run_button = tk.Button(window, text="RUN", width=10, font ="none 18 bold", command=run_genetic).grid(row = 15,  column = 0, sticky=tk.W)
 exit_button = tk.Button(window, text="EXIT", width=10, font ="none 18 bold", command=close_window).grid(row = 15,  column = 2, sticky=tk.E)
+clear_button = tk.Button(window, text="CLEAR", width=10, font ="none 18 bold", command=clear_plots).grid(row = 15,  column = 1, sticky=tk.E) 
 
 #Outputs!
 result_outpout = tk.Text(window, width=70, height=1, wrap=tk.WORD, background="white")
@@ -432,6 +446,9 @@ fig = plt.Figure(figsize=(4.5, 3), dpi=100)
 plt.rcParams.update({'font.size': 8})
 #Φτιάχνω ένα γράφημα
 ax = fig.add_subplot(111)
+ax.set_xlabel('Generations')
+ax.set_ylabel('Fitness')
+
 
 canvas = FigureCanvasTkAgg(fig,  master=window)
 canvas.draw()
